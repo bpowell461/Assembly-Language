@@ -1,0 +1,73 @@
+     1                                  ;Brad Powell
+     2                                  ;Project 2 Adding Integers
+     3                                  ;09/16/20
+     4                                  ;I like assembly!
+     5                                  
+     6                                  SECTION .data
+     7                                  SECTION .bss
+     8 00000000 <res 00000002>          ax1: resb 2
+     9 00000002 <res 00000002>          ax2: resb 2
+    10 00000004 <res 00000002>          ax3: resb 2
+    11 00000006 <res 00000002>          ax4: resb 2
+    12 00000008 <res 00000002>          ax5: resb 2
+    13 0000000A <res 00000002>          ax6: resb 2
+    14 0000000C <res 00000002>          ax7: resb 2
+    15 0000000E <res 00000002>          ax8: resb 2
+    16 00000010 <res 00000002>          ax9: resb 2
+    17 00000012 <res 00000002>          ax10: resb 2
+    18                                  SECTION .text
+    19                                  global _main
+    20                                  _main:
+    21 00000000 66B8BACD                	mov AX, 0CDBAh
+    22 00000004 66BBABCD                	mov BX, 0CDABh
+    23 00000008 6601D8                  	add AX, BX
+    24 0000000B 66A3[00000000]          	mov [ax1], AX
+    25                                  
+    26 00000011 66B8CDAB                	mov AX, 0ABCDh
+    27 00000015 66BBCDAB                        mov BX, 0ABCDh
+    28 00000019 6601D8                          add AX, BX
+    29 0000001C 66A3[02000000]          	mov [ax2], AX
+    30                                  
+    31 00000022 66B8FAFA                	mov AX, 0FAFAh
+    32 00000026 66BB0505                        mov BX, 00505h
+    33 0000002A 6601D8                          add AX, BX
+    34 0000002D 66A3[04000000]                  mov [ax3], AX
+    35                                  
+    36 00000033 66B8F0F0                	mov AX, 0F0F0h
+    37 00000037 66BB00FF                        mov BX, 0FF00h
+    38 0000003B 6601D8                          add AX, BX
+    39 0000003E 66A3[06000000]                  mov [ax4], AX
+    40                                  
+    41 00000044 66B868D4                	mov AX, 0D468h
+    42 00000048 66BB982B                        mov BX, 02B98h
+    43 0000004C 6601D8                          add AX, BX
+    44 0000004F 66A3[08000000]                  mov [ax5], AX
+    45                                  
+    46 00000055 66B80F70                	mov AX, 0700Fh
+    47 00000059 66BBF10F                        mov BX, 00FF1h
+    48 0000005D 6601D8                          add AX, BX
+    49 00000060 66A3[0A000000]                  mov [ax6], AX
+    50                                  
+    51 00000066 66B83412                	mov AX, 01234h
+    52 0000006A 66BB5476                        mov BX, 07654h
+    53 0000006E 6601D8                          add AX, BX
+    54 00000071 66A3[0C000000]                  mov [ax7], AX
+    55                                  
+    56 00000077 66B80B0B                	mov AX, 00B0Bh
+    57 0000007B 66BB1EA1                        mov BX, 0A11Eh
+    58 0000007F 6601D8                          add AX, BX
+    59 00000082 66A3[0E000000]                  mov [ax8], AX
+    60                                  
+    61 00000088 66B85476                	mov AX, 07654h
+    62 0000008C 66BB9A78                        mov BX, 0789Ah
+    63 00000090 6601D8                          add AX, BX
+    64 00000093 66A3[10000000]                  mov [ax9], AX
+    65                                  
+    66 00000099 66B80080                	mov AX, 08000h
+    67 0000009D 66BB0080                        mov BX, 08000h
+    68 000000A1 6601D8                          add AX, BX
+    69 000000A4 66A3[12000000]                  mov [ax10], AX
+    70                                  
+    71 000000AA BB00000000              	mov ebx,0
+    72 000000AF B801000000              	mov eax,1
+    73 000000B4 CD80                    	int 80h
