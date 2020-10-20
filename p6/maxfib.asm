@@ -24,15 +24,16 @@ _start:
     computeMax:
 	push eax
         add eax, edx
-	jc lastBreak
+	jc popStack
 	pop edx
         jnc computeMax ;This should compute Fibonacci(46) = 1836311903
 
 
-    lastBreak:
+    popStack:
 	pop edx ;Fib(47) is in the Stack so we are popping it
 	mov DWORD [MaxFib+0], edx
 
+    lastBreak:
 
 	mov eax, 1
 	mov ebx, 0
