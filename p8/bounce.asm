@@ -13,9 +13,7 @@
 %endmacro
 
 SECTION .data
-message:	db	" "  ;;; one space
-		db	"Cheeseburger"
-		db	" "  ;;; one more space
+message:	db	" Cheeseburger "
 msglen:	EQU	($-message)
 
 cls: db	1bh, '[2J'
@@ -27,7 +25,7 @@ col     db      '00'
 
 pos     db      1bh, '['
 
-counter db 0
+counter dd 0
 
 
 sec: dd 0,100000000 
@@ -39,30 +37,25 @@ _main:
 
 	
 	call _clrscr
+
+
 	infinite:
 		setCursor 10,[counter]
 		call _clrscr 
 		Print message, msglen
-		inc byte [counter]
+		inc dword [counter]
 		call _sleep
-		cmp byte [counter], 14
-		je infiniteX
+		cmp dword [counter], 14
+		je resetCounter
 	jmp infinite
-	
-	infiniteX:
-                setCursor 10,[counter]
-                call _clrscr
-                Print message, msglen
-                dec byte [counter]
-                call _sleep
-                cmp byte [counter], 0
-                je infinite
-        jmp infiniteX
 
-
+	resetCounter:
+		mov dword [counter], 0
+		jmp infinite
 
 
 lastBreak:
+
 
 mov eax, 1
 mov ebx, 0
@@ -70,13 +63,11 @@ int 80h
 
 
 _clrscr:
-	pusha
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, cls
 	mov edx, 4
 	int 80h
-	popa
 ret
 
 _cursor:
