@@ -5,16 +5,16 @@
 
 SECTION .data
 SECTION .bss
-ax1: resb 2
-ax2: resb 2
-ax3: resb 2
-ax4: resb 2
-ax5: resb 2
-ax6: resb 2
-ax7: resb 2
-ax8: resb 2
-ax9: resb 2
-ax10: resb 2
+ax1: resb 1
+ax2: resb 1
+ax3: resb 1
+ax4: resb 1
+ax5: resb 1
+ax6: resb 1
+ax7: resb 1
+ax8: resb 1
+ax9: resb 1
+ax10: resb 1
 SECTION .text
 global _main
 _main:
@@ -68,6 +68,7 @@ _main:
         add AX, BX
         mov [ax10], AX
 
+	lastBreak:
 	mov ebx,0
 	mov eax,1
 	int 80h

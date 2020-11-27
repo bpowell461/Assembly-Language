@@ -7,7 +7,7 @@
 SECTION .data
 
 ROWS: EQU 5	; defines a constant ROWS set to 5.
-COLS: EQU 7	; defines a constant COLS set to 6.
+COLS: EQU 7	; defines a constant COLS set to 7.
 
 MyMatrix: dd	 1,  2,  3,  4,  5,  6,  7
 	  dd	 8,  9, 10, 11, 12, 13, 14
@@ -24,48 +24,39 @@ ColSums: RESD COLS
 Sum:     RESD 1
 
 SECTION .text
-global _main
-_main:
+global _start
+_start:
+	mov ebx, MyMatrix
+	mov ecx, ROWS
+	mov eax, 0
+	mov esi, 0
+	ColLoop:
+		push ecx
+	
+		
+		mov esi, 0
+		mov ecx, COLS
+		RowLoop:
+			mov edx, [ebx]
+			add dword [RowSums+eax], edx
+			add dword [ColSums+esi], edx
+			add dword [Sum+0], edx
+			add esi, 4
+			add ebx, 4
+	
+			sub ecx, 1
+		jnz RowLoop
+		add eax, 4
+		
+		
+		pop ecx
+		sub ecx, 1
+	jnz ColLoop
+	
+	
 
-MOV ecx, 0
-MOV ebx, ROWS
+lastBreak:
 
-RowLoop:
-	mov  ebx, COLS
-
-
-ColLoop:
-	mov ecx, [colIndex]
-	mov eax, [MyMatrix+ecx]
-	add [RowSums], eax
-
-
-
-
-
-	add ecx, [rowIndex]
-	mov eax, [MyMatrix+ecx]
-	add [ColSums], eax
-
-
-	add DWORD [rowIndex], COLS*4
-
-
-
-
-
-	add DWORD [colIndex], 4
-
-
-
-	loop ColLoop
- 
-	loop RowLoop
-mov eax, RowSums
-add eax, ColSums
-mov [Sum], eax
-
-lastBreak: ;last label
 
 mov eax, 1
 mov ebx, 0

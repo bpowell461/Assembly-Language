@@ -7,9 +7,11 @@
     %endmacro
 
 %macro setCursor 2
+	pusha
 	mov ah, %1
         mov al, %2
 	call _cursor
+	popa
 %endmacro
 
 SECTION .data
@@ -40,8 +42,8 @@ _main:
 
 
 	infinite:
+		call _clrscr
 		setCursor 10,[counter]
-		call _clrscr 
 		Print message, msglen
 		inc dword [counter]
 		call _sleep
@@ -63,11 +65,13 @@ int 80h
 
 
 _clrscr:
+	pusha
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, cls
 	mov edx, 4
 	int 80h
+	popa
 ret
 
 _cursor:

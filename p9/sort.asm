@@ -68,32 +68,33 @@ _sort: ;bubble sort does not work :/
 	
 	pusha
 
-	mov ecx, 6 ;size of array
+	mov ecx, 6 ;size of array-1
 	outerLoop:
 	push ecx	
 	mov ebx, nums ;original address of nums
-	mov ecx, 6 ;size of array
+	mov ecx, 6 ;size of array-1
 	sortLoop:			
 
 	mov esi, ebx
 
 	inc esi ;next element
 
-	mov eax, [esi] ;
-
-	mov edx, [ebx]	;
+	mov eax, [esi] ;mov to a reg
+	
+	mov edx, [ebx]	;mov to a reg
 
 	cmp eax, edx ;is it less than?
 
-	jnl _skip ;if no then jump to skip
+	jnl _skip ;if no then jump to skip and do not swap
 
 	mov [esi], edx  ;exchanging, could use the xchg command
 
-	mov [ebx], eax
+	mov [ebx], eax	;this should swap but idk why it doesn't work
 
 	_skip:
 
 	inc ebx
+
 	loop sortLoop
 	pop ecx
 	loop outerLoop

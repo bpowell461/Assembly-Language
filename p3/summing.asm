@@ -18,53 +18,43 @@ global _main
 
 _main:
 
-	mov ebx, [bArray]
-	mov eax, 0
-	mov ecx, 5
-
+	mov ebx, bArray
+	mov ecx, 6
+	xor eax,eax
 	l1:
-		add eax, ebx
-		add ebx, 1
-		add ecx, eax
+		mov eax, [ebx]
+		add [bArraySum], eax		
+		inc ebx
 		loop l1
-	
-	
-	mov [bArraySum], ecx
 
 
-	mov ebx, [wArray]
-        mov eax, 0
+	mov ebx, wArray
         mov ecx, 5
-
+	xor eax,eax
         l2:
-                add eax, ebx
-                add ebx, 2
-                add ecx, eax
+                mov eax, [ebx]
+                add [wArraySum], eax
+		add ebx, 2
                 loop l2
 
-        mov [wArraySum], ecx
 
-
-	mov ebx, [dArray]
-        mov eax, 0
+	mov ebx, dArray
         mov ecx, 5
-
+	xor eax,eax
 	l3:
-		add eax, ebx
+		mov eax, [ebx]
+		add [dArraySum], eax
 		add ebx, 4
-		add ecx, eax
 		loop l3
 
-	mov dword [dArraySum], ecx
 
+	xor eax,eax
+	mov eax, [bArraySum]
+	add eax, [wArraySum]
+	add eax, [dArraySum]
 	
 
-	mov ecx, [bArraySum]
-	add ecx, [wArraySum]
-	add ecx, [dArraySum]
-	
-
-	mov [grandTotal], ecx
+	mov [grandTotal], eax
 
 
 	lastBreak:

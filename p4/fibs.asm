@@ -5,7 +5,7 @@
 
 SECTION .data
 
-count DWORD 14
+count: dd 14
 
 SECTION .bss
 
@@ -21,9 +21,9 @@ _main:
 
 	mov esi, Fibs
 
-	mov [esi+0], 0h
+	mov dword [esi+0], 0
 
-	mov [esi+4], 1h
+	mov dword [esi+4], 1
 	add esi, 8
 
 	fibLoop:
@@ -31,7 +31,7 @@ _main:
 		mov eax, [esi-4]
 		mov ebx, [esi-8]
 		add eax, ebx
-		move [esi], eax
+		mov [esi], eax
 		add esi, 4
 	loop fibLoop		
 
