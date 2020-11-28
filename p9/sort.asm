@@ -42,6 +42,7 @@ _main:
 	Print message,msglen
 	call _printArray
 
+	push nums	;Bubble Sort using C style pointer parameters
 	call _sort
 
 	Print newMessage,newMsgLen
@@ -66,39 +67,35 @@ ret
 
 _sort: ;bubble sort does not work :/
 	
-	pusha
+    push ebp
+    mov ebp,esp
+    mov edx, numslen
 
-	mov ecx, 6 ;size of array-1
-	outerLoop:
-	push ecx	
-	mov ebx, nums ;original address of nums
-	mov ecx, 6 ;size of array-1
-	sortLoop:			
+	.loop1:
+    	mov esi,[ebp+8] ;num ptr
+    	mov ecx, numslen ;number of ints
 
-	mov esi, ebx
+	.loop2:
+    	mov eax,[esi] ;compare
+    	mov ebx,[esi+4]
+    	cmp eax,ebx ;eax > ebx
+    	jl .skip
 
-	inc esi ;next element
+    	mov [esi],ebx ;swap
+    	mov [esi+4],eax
 
-	mov eax, [esi] ;mov to a reg
-	
-	mov edx, [ebx]	;mov to a reg
+	.skip:
+    	add esi,4 ;perform loop checks
+    	dec ecx
+    	cmp ecx,1
+    	jg .loop2
+    	dec edx
+    	jg .loop1
 
-	cmp eax, edx ;is it less than?
+    	mov eax,[ebp+8] ;return nums
 
-	jnl _skip ;if no then jump to skip and do not swap
-
-	mov [esi], edx  ;exchanging, could use the xchg command
-
-	mov [ebx], eax	;this should swap but idk why it doesn't work
-
-	_skip:
-
-	inc ebx
-
-	loop sortLoop
-	pop ecx
-	loop outerLoop
- 	popa
+    	mov esp,ebp
+    	pop ebp
 
 ret
 
