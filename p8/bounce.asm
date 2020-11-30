@@ -1,9 +1,11 @@
 %macro Print 2
+	pusha
     	MOV EAX, 4
 	MOV EBX, 1
 	MOV ECX, %1
 	MOV EDX, %2
 	int 80h
+	popa
     %endmacro
 
 %macro setCursor 2
@@ -20,14 +22,14 @@ msglen:	EQU	($-message)
 
 cls: db	1bh, '[2J'
 
-row     db      '00'
+row:     db      '00'
         db      ';'
-col     db      '00'
+col:     db      '00'
         db      'H'
 
-pos     db      1bh, '['
+pos:     db      1bh, '['
 
-counter dd 0
+counter: db 0
 
 
 sec: dd 0,100000000 
@@ -39,20 +41,20 @@ _main:
 
 	
 	call _clrscr
-
-
+	mov al, [counter]
+	
 	infinite:
 		call _clrscr
-		setCursor 10,[counter]
+		setCursor 10, al
 		Print message, msglen
-		inc dword [counter]
+		inc byte al
 		call _sleep
-		cmp dword [counter], 14
+		cmp byte al, 14
 		je resetCounter
 	jmp infinite
 
 	resetCounter:
-		mov dword [counter], 0
+		mov byte al, 0
 		jmp infinite
 
 
