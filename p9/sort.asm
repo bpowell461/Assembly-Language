@@ -78,7 +78,7 @@ _sort: ;bubble sort does not work :/
 	.loop2:
     	mov eax,[esi] ;compare
     	mov ebx,[esi+4]
-    	cmp eax,ebx ;eax > ebx
+    	cmp al,bl ;al > bl low order bits contain num
     	jl .skip
 
     	mov [esi],ebx ;swap
