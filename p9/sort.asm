@@ -77,15 +77,15 @@ _sort: ;bubble sort does not work :/
 
 	.loop2:
     	mov eax,[esi] ;compare
-    	mov ebx,[esi+4]
+    	mov ebx,[esi+1]
     	cmp al,bl ;al > bl low order bits contain num
     	jl .skip
 
     	mov [esi],ebx ;swap
-    	mov [esi+4],eax
+    	mov [esi+1],eax
 
 	.skip:
-    	add esi,4 ;perform loop checks
+    	add esi,1 ;perform loop checks
     	dec ecx
     	cmp ecx,1
     	jg .loop2
