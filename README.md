@@ -1,3 +1,1 @@
-This repository contains all CSC 322 project code. 
-
-Every project (with the exception of Project 10) is fully completed and works as intended.
+This repository contains all code for the undergraduate course CSC 322: Assembly language. 
